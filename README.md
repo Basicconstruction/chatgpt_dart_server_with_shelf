@@ -1,4 +1,4 @@
-```aidl
+```
 A server app built using [Shelf](https://pub.dev/packages/shelf),
 目前可使用的作用  
     简要的非流式传输服务器   
@@ -26,25 +26,25 @@ sudo apt-get install dart
 
 dart --version
 ```
-```aidl
+```
 下载本项目代码。
 初始化： 查看lib下的resources查看sql文件，创建数据库以及数据表。  
 当前： 更改lib/workflow/database/connectionImpl.dart更改数据库连接信息  
 未来： 在项目根/resources下的config.ini中修改链接信息
 ```
-```aidl
+```
 然后,cd到项目bin目录
 执行dart server.dart即可
 或者进行编译
 dart compile exe server.dart
 然后直接 ./server.exe执行即可
 ```
-```aidl
+```
 用户控制：目前后端部分实现了 1用户1可用请求的形式，当一个请求没有被返回时，另外一个请求会返回
 Response(202,body:'请等待先前的请求结束')
 
 ```
-```aidl
+```
 计费: 本项目采用了缓存技术，但是没有额外地加锁，有线程安全的问题，但是一般来说不会有
 很大的问题，最多就是用户的token消耗没有被计入，对于同一用户，请求10次就会同步一次数据库，同时
 服务端使用ctrl+c进行终止时，也会进行数据同步，有可能会出现问题。
@@ -56,7 +56,7 @@ Response(202,body:'请等待先前的请求结束')
 我们收费就是1元10wtoken左右。
 当没有这么优惠的key时,250w/35/1.8 约等于 4w token。即可
 ```
-```aidl
+```
 设计成免费时，可以在注册成功时，使得当前key可用token以及总token是一个很大的数即可。
 也可避免被人恶意使用.
 ```
