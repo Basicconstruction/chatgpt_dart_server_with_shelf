@@ -1,0 +1,64 @@
+error
+{
+    error:
+    {
+        message: You exceeded your current quota, please check your plan and billing details.,
+        type: insufficient_quota,
+        param: null, code: null
+    }
+}
+
+
+success
+{
+    id: chatcmpl-6zJcsFNJf1IQQJQpFcItsJnx6avZF,
+    object: chat.completion,
+    created: 1680071470,
+    model: gpt-3.5-turbo-0301,
+    usage: {
+        prompt_tokens: 29,
+        completion_tokens: 100,
+        total_tokens: 129
+    },
+    choices: [
+        {
+            message: {role: assistant, content: There are several ways to get an American phone in China:
+
+                1. Buy an unlocked phone in the United States and bring it with you to China. This way, you can use a local Chinese SIM card to access the local network.
+
+                2. Purchase an American phone online and have it shipped to you in China. Make sure to check if the seller ships internationally and what the shipping fees will cost.
+
+                3. Buy a phone from an American retailer that has a presence in China, such as Apple or},
+
+            finish_reason: length,
+            index: 0
+        }
+    ]
+}
+
+{
+    id: chatcmpl-6zJk1TbDS4cOOpEIpz4Q9I5PU11lP,
+    object: chat.completion,
+    created: 1680071913,
+    model: gpt-3.5-turbo-0301,
+    usage: {prompt_tokens: 29, completion_tokens: 145, total_tokens: 174},
+    choices: [{message: {role: assistant, content: There are a few ways to get an American phone in China:
+
+        1. Purchase an unlocked phone online: You can buy an unlocked phone from websites like Amazon or eBay and have it shipped to China.
+
+        2. Bring a phone from the US: If you are traveling to China from the US, you can bring your American phone with you.
+
+        3. Buy a phone from an American retailer: If you have friends or family in the US, you can ask them to buy a phone for you from an American retailer and have it shipped to China.
+
+        4. Purchase a phone from a local electronics store: Some electronics stores in China may sell American phones, but they may be more expensive than buying one online or from the US.},
+        finish_reason: stop,
+        index: 0}]
+}
+
+A server response code is a three-digit code that is returned by a server in response to a client's request. These codes indicate the status of the requested resource and provide information on how the server is handling the request. There are several types of server response codes, including:
+
+- 1xx (Informational): These codes are used to indicate that the server has received the client's request and is continuing to process it.
+- 2xx (Successful): These codes indicate that the server has successfully processed the client's request and returned the requested resource.
+- 3xx (Redirection): These codes indicate that the client must take additional action to complete the request, such as following a redirect.
+- 4xx (Client Error): These codes indicate that the server was unable to process the client's request due to an error on the client's side.
+- 5xx (Server Error): These codes indicate that the server was unable to process the client's request due to an error on the server's side.

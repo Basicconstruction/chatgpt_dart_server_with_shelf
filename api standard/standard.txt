@@ -1,0 +1,39 @@
+A server app built using [Shelf](https://pub.dev/packages/shelf),
+目前可使用的作用
+    简要的非流式传输服务器
+认证方式:
+    以post方式提交 username和password字段。然后就可以使用
+接下来的api。
+    api使用: post或get方法提交
+验证方式：
+/app/login
+    客户向服务器发送json格式的请求体（POST）或者直接使用网页默认的x-www-form-urlencoded
+        示例格式如下：
+{
+    "username": "key",
+    "password": "word"
+}或者提交表单 username=xxx&&password=yyy
+然后服务端同样使用json解码，如果登录成功，返回下面信息
+{"message":"登录成功","$temporary_key":""}
+为了保证效率和防止撞库,秘钥格式为 5位字符+8位数字,例如 lovey52013140
+其中temporary_key为临时请求秘钥（特定于用户),session中加入该用户信息。
+之后用户获得这个临时请求秘钥信息，在请求时发送要请求的完整对话信息以及临时秘钥
+服务端后台处理
+[
+    从数据库中查询该登录信息，然后获取该用户剩余的token数目。单次对话限度为10 0000token.
+]
+v1/chat/completions
+{
+    "message": [
+        {
+        "role": "assistant",
+        "content": "How i can help you?"
+        },
+        {
+        "role": "user",
+        "content": "how can i get a american phone in china!"
+        }
+    ],
+    "temporary_key":"$temporary_key"
+}
+服务端使用json解码信息并识别临时请求秘钥的用户
