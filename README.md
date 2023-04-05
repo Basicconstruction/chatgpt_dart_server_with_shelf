@@ -6,7 +6,7 @@ A server app built using [Shelf](https://pub.dev/packages/shelf),
 简单来说就是,服务端对客户进行了额外的控制，用户需要登录才能正常访问api接口。  
 
 如何使用该项目：（编译运行）
-ubuntu lts 22.04 
+ubuntu lts 22.04 / ubuntu
 安装dart
 ```
 ```
@@ -33,11 +33,21 @@ dart --version
 未来： 在项目根/resources下的config.ini中修改链接信息
 ```
 ```
-然后,cd到项目bin目录
-执行dart server.dart即可
-或者进行编译
+cd 到项目根目录
+执行 
+dart pub install
+安装依赖
+
+然后,cd到项目bin目录执行
+dart server.dart
+即可
+
+或者进行编译为本机可执行文件
 dart compile exe server.dart
-然后直接 ./server.exe执行即可
+
+然后直接 
+./server.exe
+执行即可
 ```
 ```
 用户控制：目前后端部分实现了 1用户1可用请求的形式，当一个请求没有被返回时，另外一个请求会返回

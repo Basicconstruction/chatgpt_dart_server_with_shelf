@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset=utf-8>
+  <title>发送POST请求</title>
+  <style>
+    #input-box,textarea{
+      width: 60vw;
+      height: 200px;
+    }
+    #bt_div{
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+     }
+  </style>
+</head>
+<body>
+<label for="input-box">按行输入对话信息,技术行为 assistant,偶数行为用户</label>
+<textarea id="input-box">
+  </textarea>
+<br>
+<div id="bt_div">
+  <button onclick="sendRequest()">提交</button>
+</div>
+<br><br>
+
+<label for="output-box">接收到的数据：</label>
+<textarea id="output-box" cols="30" rows="10" readonly>
+</textarea>
+<script>
+  function sendRequest() {
+    // 获取输入框中的文本
+    var inputText = document.getElementById("input-box").value;
+
+    // 创建XMLHttpRequest对象
+    var xhr = new XMLHttpRequest();
+
+    // 设置POST请求的URL和参数
+    xhr.open("POST", "http://154.19.184.190:8082/v1/chat/completions", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    var lines = inputText.split("\n");
+    var output = { "message": [] };
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i].trim();
+      if (line !== "") {
+        var message = {};
+        message.role = i % 2 === 0 ? "assistant" : "user";
+        message.content = line;
+        output.message.push(message);
+      }
+    }
+    xhr.send(JSON.stringify(output));
+
+    // 监听请求状态变化事件
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 将接收到的数据展示在输出框中
+        var outputBox = document.getElementById("output-box");
+        outputBox.value = xhr.responseText;
+      }
+    };
+  }
+</script>
+</body>
+</html>

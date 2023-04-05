@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请求数据</title>
+</head>
+<body>
+<script>
+    // 设置请求数据
+    const data = {
+        "message": [
+            {
+                "role": "assistant",
+                "content": "How i can help you?"
+            },
+            {
+                "role": "user",
+                "content": ""
+            }
+        ],
+        "temporary_key": "$temporary_key"
+    };
+
+    // 发送请求
+    fetch("http://154.19.184.190:8083/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message[0].content);
+            console.log(data.message[1].content);
+        })
+        .catch(error => console.error(error));
+</script>
+</body>
+</html>

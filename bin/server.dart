@@ -8,10 +8,12 @@ import 'package:chatgpt_dart_server_with_shelf/workflow/key/KeyHandler.dart';
 import 'package:chatgpt_dart_server_with_shelf/workflow/staticProperty/staticProperty.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
+import 'package:shelf_cors_headers/shelf_cors_headers.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf_session/cookies_middleware.dart';
 import 'package:shelf_session/session_middleware.dart';
 import 'package:shelf_static/shelf_static.dart';
+
 //dart compile exe bin/main.dart
 void main(List<String> args) async {
   ProcessSignal.sigint.watch().listen((signal) async {
@@ -25,6 +27,7 @@ void main(List<String> args) async {
 }
 serveAt() async{
   final router = Router();
+  
   router.all('/v1/chat/completions',(Request request){
     var response = checkAccess(request);
     if(response!=null){
@@ -34,10 +37,13 @@ serveAt() async{
   });
   router.post('/app/login',loginHandle);
   final handler = Cascade().add(router).handler;
+  final overrideHeaders = {
+  ACCESS_CONTROL_ALLOW_ORIGIN: '*'};
   final pipeline = const Pipeline()
       .addMiddleware(logRequests())
       .addMiddleware(cookiesMiddleware())
       .addMiddleware(sessionMiddleware())
+      .addMiddleware(corsHeaders(headers: overrideHeaders))
       .addHandler(handler);
   const address = '0.0.0.0';
   const port = 8082;

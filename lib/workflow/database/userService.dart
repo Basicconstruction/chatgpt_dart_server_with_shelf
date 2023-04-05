@@ -31,9 +31,17 @@ class UserService{
     var conn = await ConnectionPool.getAConnection();
     Results result = await conn.query('select * from user');
     List<User> users = [];
-    for(var row in result){
-      users.add(User.full(int.parse(row['userId'].toString()), row['username'] as String, row['password'] as String,row['current_key'] as String, int.parse(row['key_token'].toString()),int.parse(row['totalToken'].toString())));
-    }
+    // for(var row in result){
+    //   users.add(User.full(int.parse(row['userId'].toString()), row['username'] as String, row['password'] as String,row['current_key'] as String, int.parse(row['key_token'].toString()),int.parse(row['totalToken'].toString())));
+    // }
+    users = result.map((e) => User.full(
+        int.parse(e['userId'].toString()),
+        e['username'].toString(),
+        e['password'].toString(),
+        e['current_key'].toString(),
+        int.parse(e['key_token'].toString()),
+        int.parse(e['totalToken'].toString())
+    )).toList();
     ConnectionPool.backConnection(conn);
     return users;
   }

@@ -249,6 +249,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.0"
+  shelf_cors_headers:
+    dependency: "direct main"
+    description:
+      name: shelf_cors_headers
+      sha256: "1813f27a069e347f2e0f7cec4012f6b20c647eb3dcf8ee164510cbfe6a016cb2"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.4"
   shelf_packages_handler:
     dependency: transitive
     description:
