@@ -19,7 +19,7 @@ Future<Response> chatHandle(Request request)async{
     return Response(202,headers: corsHeaders,body:'请等待先前的请求结束');
   }
   KeyRequestTimes.addRequestTime(key);//标识用户请求进入用户请求队列
-  final apiKey = 'sk-CKvjRkhQKMV2mEYarBAiT3BlbkFJS9FsONjtjtyutyujty';
+  final apiKey = 'sk-CKvjRkhQKMV2mEYarBAiT367568hhghjtjtyutyujty';
   final url = Uri.parse('https://api.openai.com/v1/chat/completions');
   final headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $apiKey'};
   int av_token = KeyHandler.quickMap[key]??0;

@@ -3,6 +3,7 @@ import 'dart:io' show Cookie, File, ProcessSignal, exit;
 import 'package:chatgpt_dart_server_with_shelf/api_handler/chat_handle.dart';
 import 'package:chatgpt_dart_server_with_shelf/login_handle/check_access.dart';
 import 'package:chatgpt_dart_server_with_shelf/login_handle/login_handle.dart';
+import 'package:chatgpt_dart_server_with_shelf/register_handle/register_handle.dart';
 import 'package:chatgpt_dart_server_with_shelf/workflow/database/userService.dart';
 import 'package:chatgpt_dart_server_with_shelf/workflow/key/KeyHandler.dart';
 import 'package:chatgpt_dart_server_with_shelf/workflow/staticProperty/staticProperty.dart';
@@ -18,7 +19,7 @@ import 'package:shelf_static/shelf_static.dart';
 void main(List<String> args) async {
   ProcessSignal.sigint.watch().listen((signal) async {
     // 处理 Ctrl+C 中断操作，比如关闭文件、保存进度等操作
-    print("程序即将终止,请等待工作完成");
+    print("程序即将终止,请等待工作完成...\n正在进行数据一致性操作,请等待数据库同步完成");
     await KeyHandler.finalization();
     print("工作完成");
     exit(0); // 退出程序
@@ -36,6 +37,7 @@ serveAt() async{
     return chatHandle(request);
   });
   router.post('/app/login',loginHandle);
+  router.post('/app/register',registerHandle);
   final handler = Cascade().add(router).handler;
   final overrideHeaders = {
   ACCESS_CONTROL_ALLOW_ORIGIN: '*'};
